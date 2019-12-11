@@ -3,21 +3,16 @@ import logo from './logo.svg';
 import './App.css';
 import Task, {NewTask} from './components/Task';
 import { useEffect } from 'react';
+import {Text} from "office-ui-fabric-react";
 
 
 function App() {
-  const [state, setState] = React.useState(null);
+  const [state, setState] = React.useState([]);
 
+  let request = new Request("https://free-todo-app.herokuapp.com/api/tasks");
+  let apiCall = () => fetch(request).then(res => res.json()).then(res => { setState(res); return res; });
 
-  useEffect(()=>{
-    let req = fetch("https://free-todo-app.herokuapp.com/api/tasks").then(
-      res => res.json()
-    )
-      .then(res => { setState(res) });
-  }, ['componentDidMount']);
-
-  console.log(state);
-
+  apiCall();
 
   return (
     <div className="App">
@@ -27,7 +22,10 @@ function App() {
           Edit <code>src/App.js</code> and save to reload.
         </p>
       </header> */}
-      {state && state.map( it => <Task {...it} key={it.name}/> )}
+      <Text variant="mega">Welcome to Todoist</Text>
+      <br/>
+      <br/>
+      {state.map(it => <Task {...it} key={it.name} onSave={apiCall}/> )}
       <NewTask />
     </div>
   );

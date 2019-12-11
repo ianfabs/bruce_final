@@ -1,0 +1,7 @@
+.WeatherItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  justify-content: start;
+}
