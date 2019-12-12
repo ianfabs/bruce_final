@@ -16,6 +16,7 @@ import { mergeStyles } from 'office-ui-fabric-react/lib/Styling';
 import { FontSizes } from '@uifabric/styling';
 import './Task.css';
 import { useState } from "react";
+import QR from "./QR";
 
 const indentTextClass = mergeStyles({
   // marginLeft: '29px'
@@ -115,6 +116,7 @@ export default (props) => {
           iconProps={{ iconName: 'Clear', color: 'Red10' }}
           onClick={handleDelete}
         />
+        <QR data={props.name}/>
         <Modal
           isOpen={show}
           onDismiss={() => { setShow(false) }}
@@ -155,6 +157,7 @@ export default (props) => {
           </div>
         </Modal>
       </div>
+      <Text>{props.description}</Text>
       {/*
       <Text>
         {props.description}

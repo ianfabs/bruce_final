@@ -12,8 +12,9 @@ function App() {
   let request = new Request("https://free-todo-app.herokuapp.com/api/tasks");
   let apiCall = () => fetch(request).then(res => res.json()).then(res => { setState(res); return res; });
 
+  // useEffect(()=>{apiCall();}, ['componentDidMount', 'state']);
   apiCall();
-
+  
   return (
     <div className="App">
       {/* <header className="App-header">
@@ -25,7 +26,9 @@ function App() {
       <Text variant="mega">Welcome to Todoist</Text>
       <br/>
       <br/>
-      {state.map(it => <Task {...it} key={it.name} onSave={apiCall}/> )}
+      <div className="list">
+        {state.map(it => <Task {...it} key={it.name} onSave={apiCall}/> )}
+      </div>
       <NewTask />
     </div>
   );
